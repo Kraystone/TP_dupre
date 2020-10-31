@@ -1,14 +1,17 @@
 #!/bin/bash
 #Script de test Marion après plusieurs arrêts mentales
 #TD LINUX
-IP="iptables
+IP="iptables"
 
-#REmise à zéro
+##Créer un nouveau fichier pour appliqué les règles iptables
+touch /etc/iptables/iptablesMarion.rules
+vim iptablesMarion.rules
+
+#Remise à zéro
 echo"[Reset les tebles]"
-sudo ${IP} -F
-sudo ${IP} -X
-sudo ${IP} -t nat -F
-
+${IP} -F
+${IP} -X
+${IP} -t nat -F
 
 #connexion entrant bloqué par défaut
 ${IP} -P INPUT DROP
@@ -49,7 +52,7 @@ ${IP} -A INPUT -p tcp -m tcp --sport 3306 -j ACCEPT
 ${IP} -A OUTPUT -p tcp -m tcp --dport 3306 -j ACCEPT
 ${IP} -A OUTPUT -p tcp -m tcp --sport 3306 -j ACCEPT  
 
-#Exo 3 
+#Exo 3  
 #règle anti-DDoS 
 ##règle bloque tous les paquets qui ne sont pas un paquet SYN et n'appartiennent pas à une connexion TCP établie (established)
 echo"[drop les paquets invalide]"
@@ -123,7 +126,7 @@ filter   = apache-badbots
 logpath  = /var/log/apache2/*error.log
 maxretry = 2
 
- ##Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
+##Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
 [apache-clientd]
 enabled = true
 port = http,https
