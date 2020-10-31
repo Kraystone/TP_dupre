@@ -1,22 +1,17 @@
 #!/bin/bash
 #Script de test Marion après plusieurs arrêts mentales
 #TD LINUX
-IP="iptables"
+IP="iptable"
 
 ##Créer un nouveau fichier pour appliqué les règles iptables
 touch /etc/iptables/iptablesMarion.rules
-vim iptablesMarion.rules
+echo" [mise en place]" > iptablesMarion.rules
 
 #Remise à zéro
 echo"[Reset les tebles]"
 ${IP} -F
 ${IP} -X
 ${IP} -t nat -F
-
-#connexion entrant bloqué par défaut
-${IP} -P INPUT DROP
-${IP} -P OUTPUT DROP
-${IP} -P FORWARD DROP
 
 #les connexions destinées à être routées sont acceptées par défaut
 ${IP} -P INPUT ACCEPT
@@ -25,7 +20,7 @@ ${IP} -P OUTPUT ACCEPT
 
 #pas de filtrage sur l'interface de loopback
 ${IP} -A INPUT -i lo -j ACCEPT
-${IP} -A INPUT -o lo -j ACCEPT
+
 
 #Accepter le procole ICMP (notamment le ping) ?Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
 
@@ -86,9 +81,8 @@ ${IP} -A port-scan -j DROP
 
 #Intallation de fail2ban
 echo"[Intallation de fail2ban]"
-sudo apt install fail2ban -y
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-[DEFAULT]
+apt install fail2ban -y
+echo"[DEFAULT]
 ignoreip = 127.0.0.1/8
 findtime = 600
 bantime = 86400
@@ -136,6 +130,7 @@ enabled = true
 port    = ssh
 filter  = sshd
 logpath  = /var/log/auth.log
-maxretry = 3
+maxretry = 3" > /etc/fail2ban/jail.conf
+
 
 systemctl restart fail2ban
