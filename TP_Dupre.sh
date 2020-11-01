@@ -8,6 +8,7 @@ NC='\033[0m'
 if [ "$HOSTNAME" = web ]; then
   printf '%s\n' "Execution du script pour la machine WEB"
   #La fonction pause, assez utile pour .... mettre en pause
+fi
 pause (){
     echo -e "${GREEN}Appuyer sur une touche ${NC}"
     read -p "$*"
@@ -57,6 +58,7 @@ fi
 ###############################################BDD#########################################
 if [ "$HOSTNAME" = bdd ]; then
   echo '%s\n' "Execution du script pour la machine BDD"
+fi
 pause (){
     echo -e "${GREEN}Appuyer sur une touche ${NC}"
     read -p "$*"
