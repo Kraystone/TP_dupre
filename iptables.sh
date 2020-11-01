@@ -5,10 +5,10 @@ IP="iptables"
 
 ##Créer un nouveau fichier pour appliqué les règles iptables
 
-echo " [mise en place] "
+echo "[mise en place]"
 
 #Remise à zéro
-echo " [Reset les tables] 
+echo "[Reset les tables]
 ${IP} -F
 ${IP} -X
 ${IP} -t nat -F
@@ -42,14 +42,14 @@ ${IP} -A OUTPUT -p udp -m udp --sport 53 -j ACCEPT
 
 # Pour Mairadb et mysql le port 3306 - maria db
 ${IP} -A INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
-${IP} -A INPUT -p tcp -m tcp --sport 3306 -j ACCEPT 
+${IP} -A INPUT -p tcp -m tcp --sport 3306 -j ACCEPT
 ${IP} -A OUTPUT -p tcp -m tcp --dport 3306 -j ACCEPT
 ${IP} -A OUTPUT -p tcp -m tcp --sport 3306 -j ACCEPT
 
 #Exo 3
 #règle anti-DDoS
 ##règle bloque tous les paquets qui ne sont pas un paquet SYN et n'appartiennent pas à une connexion TCP établie (established)
-echo"[drop les paquets invalide]"
+echo "[drop les paquets invalide]"
 ${IP} -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
 ##bloqué de nouveau les paquetss qui ne sont pas SYN
 ${IP} -t mangle -A PREROUTING -P tcp! --syn -m conntrack --ctstate NEW -j DROP
@@ -80,13 +80,13 @@ ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update 
 ## Protection contre l'analyse des ports
 ${IP} -N port-scan
 ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
-${IP} -A port-scan -j DROP " >  /etc/iptables/iptablesMarion.rules
+${IP} -A port-scan -j DROP" > /etc/iptables/iptablesMarion.rules
 
 
 #Intallation de fail2ban
-echo"[Intallation de fail2ban]"
+echo "[Intallation de fail2ban]"
 apt install fail2ban -y
-echo " [DEFAULT]
+echo "[DEFAULT]
 ignoreip = 127.0.0.1/8
 findtime = 600
 bantime = 86400
@@ -135,6 +135,5 @@ port    = ssh
 filter  = sshd
 logpath  = /var/log/auth.log
 maxretry = 3" > /etc/fail2ban/jail.conf
-
 
 systemctl restart fail2ban
