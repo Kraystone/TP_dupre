@@ -119,7 +119,7 @@ filter   = apache-badbots
 logpath  = /var/log/apache2/*error.log
 maxretry = 2
 
-#cdLes utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
+#Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
 [apache-clientd]
 enabled = true
 port = http,https
