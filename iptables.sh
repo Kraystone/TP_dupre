@@ -1,11 +1,7 @@
 #!/bin/bash
-#Script de test Marion après plusieurs arrêts mentales
+#Marion Bariteau B2C1
 #TD LINUX
 IP="iptables"
-
-##Créer un nouveau fichier pour appliqué les règles iptables
-
-echo "[mise en place]"
 
 #Remise à zéro
 echo "[Reset les tables]
@@ -20,12 +16,8 @@ ${IP} -t mangle -X
 ${IP} -P INPUT ACCEPT
 ${IP} -P FORWARD ACCEPT
 ${IP} -P OUTPUT ACCEPT
-
 #pas de filtrage sur l'interface de loopback
 ${IP} -A INPUT -i lo -j ACCEPT
-
-#Accepter le procole ICMP (notamment le ping) ?Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
-
 #connexion déjà établie (acp packet)
 ${IP} -A INPUT -m conntrack --cstate RELATED,ESTABLISHED -j ACCEPT
 
@@ -33,7 +25,6 @@ ${IP} -A INPUT -m conntrack --cstate RELATED,ESTABLISHED -j ACCEPT
 
 ${IP} -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 ${IP} -A OUTPUT -p tcp -m tcp --sport 22 -j ACCEPT
-
 ${IP} -A INPUT -p udp -m udp --dport 53 -j ACCEPT
 ${IP} -A INPUT -p udp -m udp --sport 53 -j ACCEPT
 ${IP} -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
@@ -72,6 +63,7 @@ ${IP} -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN, RST, ACK, FIN, URG -j 
 ${IP} -A INPUT -p tcp -m conntrack --ctstate NEW -m limit --limit 20/s --limit-burst 20 -j ACCEPT
 ${IP} -A INPUT -p tcp -m conntrack --ctstate NEW -j DROP
 
+${IP} -P INPUT -i ens33 DROP
 
 ## Protection par force brute SSH
 ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
@@ -79,8 +71,10 @@ ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update 
 ## Protection contre l'analyse des ports
 ${IP} -N port-scan
 ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
-${IP} -A port-scan -j DROP" > /etc/iptables/iptablesMarion.rules
+${IP} -A port-scan -j DROP"
 
+apt install iptables-persistent -y
+${IP}-save > /etc/iptables/rules.v4 " > /etc/iptables/iptablesMarion.rules
 
 #Intallation de fail2ban
 echo "[Intallation de fail2ban]"
