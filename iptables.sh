@@ -73,8 +73,9 @@ ${IP} -N port-scan
 ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
 ${IP} -A port-scan -j DROP
 
-apt install iptables-persistent -y
-${IP}-save > /etc/iptables/rules.v4 " > /etc/iptables/iptablesMarion.rules
+echo "apt install iptables-persistent -y
+${IP}-save > /etc/iptables/rules.v4"
+" > /etc/iptables/iptablesMarion.rules
 
 #Intallation de fail2ban
 echo "[Intallation de fail2ban]"
