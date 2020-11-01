@@ -1,17 +1,20 @@
 #!/bin/bash
 #Script de test Marion après plusieurs arrêts mentales
 #TD LINUX
-IP="iptable"
+IP="iptables"
 
 ##Créer un nouveau fichier pour appliqué les règles iptables
-touch /etc/iptables/iptablesMarion.rules
-echo" [mise en place]" > iptablesMarion.rules
+
+echo" [mise en place]
 
 #Remise à zéro
 echo"[Reset les tebles]"
 ${IP} -F
 ${IP} -X
 ${IP} -t nat -F
+${IP} -t nat -X
+${IP} -t mangle -F
+${IP} -t mangle -X
 
 #les connexions destinées à être routées sont acceptées par défaut
 ${IP} -P INPUT ACCEPT
@@ -77,7 +80,8 @@ ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update 
 ## Protection contre l'analyse des ports
 ${IP} -N port-scan
 ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
-${IP} -A port-scan -j DROP
+${IP} -A port-scan -j DROP " >  /etc/iptables/iptablesMarion.rules
+
 
 #Intallation de fail2ban
 echo"[Intallation de fail2ban]"
@@ -115,7 +119,7 @@ filter   = apache-badbots
 logpath  = /var/log/apache2/*error.log
 maxretry = 2
 
-##Les utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
+#cdLes utilisateurs visitant un peu trop souvent une URL précise (au hasard, page de login - "Brute Force")
 [apache-clientd]
 enabled = true
 port = http,https
