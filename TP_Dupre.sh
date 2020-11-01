@@ -37,10 +37,11 @@ if [ "$HOSTNAME" = web ]; then
       ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
       ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
       ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-      ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
+      ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
     fi
     if [ $choix = 2 ]; then
-      echo -e "Phase 2"
+    #je prends tout les addresses ip au debuts des lignes et je les affiche dans step2.csv
+      grep -E -o "^([0-9]{1,3}[\.]){3}[0-9]{1,3}" /var/log/apache2/adventofcode.log > step2.csv
     fi
     if [ $choix = 3 ]; then
       echo -e "Phase 3"
@@ -84,17 +85,20 @@ if [ "$HOSTNAME" = bdd ]; then
     ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
+    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
     fi
     if [ $choix = 2 ]; then
-      echo -e "Phase 2"
+    #je me connecte en root sur la base adventofcode et je selectionne tout pour le mettre dans un fichier .csv qui seras enregistrer dans la machine de base de donées
+      mysql -u root -p"leo" adventofcode -e"select * from \`2017\`;" > bddstep2.csv
+      scp bddstep2.csv  admin_web@192.168.1.70:/home/admin_web/
     fi
     if [ $choix = 3 ]; then
       echo -e "Phase 3"
     fi
     if [ $choix = 4 ]; then
       echo -e "${RED}Tu nous quittes :c${NC}"
-      reboot
+      #reboot
+      exit 1
     fi
   done
 fi
