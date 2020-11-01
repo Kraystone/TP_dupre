@@ -26,22 +26,23 @@ read choix
 stty echo
 if [ $choix = 1]; then
   echo -e "Ecriture des regles" #ALED LE FR marion ?!
-  echo "${IP} -F INPUT
-        ${IP} -F OUTPUT
-        ${IP} -F FORWARD
-        ${IP} -x
+  echo "
+  ${IP} -F INPUT
+  ${IP} -F OUTPUT
+  ${IP} -F FORWARD
+  ${IP} -x
         
-        MARION
+  MARION
 
-        ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
-        ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
-        ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
-        ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
-        ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
-        ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
-        ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
-        ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-        ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
+  ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
+  ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
+  ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
+  ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
+  ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
+  ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
+  ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
+  ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
+  ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
   
 fi
 if [ $choix = 2]; then
@@ -74,22 +75,23 @@ read choix
 stty echo
 if [ $choix = 1]; then
   printf "Ecriture des regles" #ALED LE FR marion ?!
-  echo "${IP} -F INPUT
-        ${IP} -F OUTPUT
-        ${IP} -F FORWARD
-        ${IP} -x
+  echo "
+  ${IP} -F INPUT
+  ${IP} -F OUTPUT
+  ${IP} -F FORWARD
+  ${IP} -x
         
-        MARION
+  MARION
 
-        ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
-        ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
-        ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
-        ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
-        ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
-        ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
-        ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
-        ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-        ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
+  ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
+  ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
+  ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
+  ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
+  ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
+  ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
+  ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
+  ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
+  ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
 fi
 if [ $choix = 2]; then
   echo -e "Phase 2"
