@@ -46,7 +46,8 @@ if [ "$HOSTNAME" = web ]; then
       echo -e "Phase 3"
     fi
     if [ $choix = 4 ]; then
-      echo -e "Phase 4"
+      echo -e "${RED}Tu nous quittes :c${NC}"
+      reboot
     fi
   done
 fi
@@ -92,7 +93,8 @@ if [ "$HOSTNAME" = bdd ]; then
       echo -e "Phase 3"
     fi
     if [ $choix = 4 ]; then
-      echo -e "Phase 4"
+      echo -e "${RED}Tu nous quittes :c${NC}"
+      reboot
     fi
   done
 fi
