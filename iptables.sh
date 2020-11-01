@@ -71,7 +71,7 @@ ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update 
 ## Protection contre l'analyse des ports
 ${IP} -N port-scan
 ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
-${IP} -A port-scan -j DROP"
+${IP} -A port-scan -j DROP
 
 apt install iptables-persistent -y
 ${IP}-save > /etc/iptables/rules.v4 " > /etc/iptables/iptablesMarion.rules
