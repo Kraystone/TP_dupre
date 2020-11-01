@@ -6,7 +6,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 ###############################################WEB#########################################
 if [ "$HOSTNAME" = web ]; then
-  echo '%s\n' "Execution du script pour la machine WEB"
+  echo "Execution du script pour la machine WEB"
 fi
 while :
 do 
@@ -96,3 +96,4 @@ fi
 if [ $choix = 4 ]; then
   echo -e "Phase 4"
 fi
+done
