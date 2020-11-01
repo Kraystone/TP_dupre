@@ -44,9 +44,18 @@ if [ $choix = 1]; then
         ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
   
 fi
+if [ $choix = 2]; then
+  echo -e "Phase 2"
+fi
+if [ $choix = 3]; then
+  echo -e "Phase 3"
+fi
+if [ $choix = 4]; then
+  echo -e "Phase 4"
+fi
 ###############################################BDD#########################################
 if [ "$HOSTNAME" = bdd ]; then
-  printf '%s\n' "Execution du script pour la machine BDD"
+  echo '%s\n' "Execution du script pour la machine BDD"
 pause (){
     echo -e "${GREEN}Appuyer sur une touche ${NC}"
     read -p "$*"
@@ -81,4 +90,13 @@ if [ $choix = 1]; then
         ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
         ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
         ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptablesMarion.rules
+fi
+if [ $choix = 2]; then
+  echo -e "Phase 2"
+fi
+if [ $choix = 3]; then
+  echo -e "Phase 3"
+fi
+if [ $choix = 4]; then
+  echo -e "Phase 4"
 fi
