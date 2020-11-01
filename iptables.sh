@@ -5,10 +5,10 @@ IP="iptables"
 
 ##Créer un nouveau fichier pour appliqué les règles iptables
 
-echo" [mise en place]
+echo " [mise en place] "
 
 #Remise à zéro
-echo"[Reset les tebles]"
+echo " [Reset les tables] 
 ${IP} -F
 ${IP} -X
 ${IP} -t nat -F
@@ -86,7 +86,7 @@ ${IP} -A port-scan -j DROP " >  /etc/iptables/iptablesMarion.rules
 #Intallation de fail2ban
 echo"[Intallation de fail2ban]"
 apt install fail2ban -y
-echo"[DEFAULT]
+echo " [DEFAULT]
 ignoreip = 127.0.0.1/8
 findtime = 600
 bantime = 86400
