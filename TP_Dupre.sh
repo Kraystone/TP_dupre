@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 ###############################################WEB#########################################
-if [ "$HOSTNAME" = web ]; then
+if [ "$HOSTNAME" = debian ]; then
   echo "Execution du script pour la machine WEB"
   while :
   do 
@@ -29,7 +29,6 @@ if [ "$HOSTNAME" = web ]; then
     ${IP} -t mangle -F
     ${IP} -t mangle -X
         
-<<<<<<< HEAD
     #les connexions destinées à être routées sont acceptées par défaut
     ${IP} -P INPUT ACCEPT
     ${IP} -P FORWARD ACCEPT
