@@ -69,6 +69,7 @@ if [ "$HOSTNAME" = debian ]; then
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" > /etc/iptables/iptables.rules
     fi
+    echo -e "${GREEN}Les regles sont ecrite dans /etc/iptables/iptables.rules.${NC}"
     if [ $choix = 2 ]; then
     #je prends tout les addresses ip au debuts des lignes et je les affiche dans step2.csv
       grep -E -o "^([0-9]{1,3}[\.]){3}[0-9]{1,3}" /var/log/apache2/adventofcode.log > step2.csv
@@ -115,8 +116,9 @@ if [ "$HOSTNAME" = debian ]; then
       ${IP} -P INPUT DROP" >> /etc/iptables/iptables.rules
       
       #Intallation de fail2ban
-      echo -e "[Intallation de fail2ban]"
+      echo -e "${MARRON}Intallation de fail2ban.${NC}"
       apt install fail2ban -y
+      echo -e "${MARRON}Fail2ban est installé.${NC}"
       echo "[DEFAULT]
       ignoreip = 127.0.0.1/8
       findtime = 600
@@ -169,9 +171,9 @@ if [ "$HOSTNAME" = debian ]; then
 
       systemctl restart fail2ban
     fi
+    echo -e "${GREEN}Fail2Ban est configuré.${NC}"
     if [ $choix = 4 ]; then
-      echo -e "${RED}Tu nous quittes :c${NC}"
-      #reboot
+      echo -e "${RED}Tu nous quittes :c.${NC}"
       exit 1
     fi
   done

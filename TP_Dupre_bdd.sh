@@ -64,16 +64,16 @@ if [ "$HOSTNAME" = debian ]; then
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP
     
     ${IP} -P INPUT DROP" >  /etc/iptables/iptables.rules
-
     fi
+    echo -e "${GREEN}Les regles sont ecrite dans /etc/iptables/iptables.rules.${NC}"
     if [ $choix = 2 ]; then
     #je me connecte en root sur la base adventofcode et je selectionne tout pour le mettre dans un fichier .csv qui seras enregistrer dans la machine de base de donées
       mysql -u root -p"leo" adventofcode -e"select * from \`2017\`;" > bddstep2.csv
       scp bddstep2.csv  admin_web@192.168.1.70:/home/admin_web/
     fi
+    echo -e "${GREEN}Les fichiers de la base de données sont sur la machine web dans home/admin_web/bddstep2.csv${NC}"
     if [ $choix = 3 ]; then
       echo -e "${RED}Tu nous quittes :c${NC}"
-      #reboot
       exit 1
     fi
   done
