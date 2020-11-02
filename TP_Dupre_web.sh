@@ -1,6 +1,6 @@
 #!/bin/bash
 IP="iptables"
-MARRON='\e[94m'
+BLUE='\e[94m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
@@ -12,7 +12,7 @@ if [ "$HOSTNAME" = debian ]; then
     echo -e "
     ${GREEN}---Menu du Script---${NC}
 
-    ${MARRON}1- Secure that stuff.
+    ${BLUE}1- Secure that stuff.
     2- Parsage des logs.
     3- Ban all the lamers.
     4- Quitter le script --->[].${NC}
@@ -116,9 +116,9 @@ if [ "$HOSTNAME" = debian ]; then
       ${IP} -P INPUT DROP" >> /etc/iptables/iptables.rules
       
       #Intallation de fail2ban
-      echo -e "${MARRON}Intallation de fail2ban.${NC}"
+      echo -e "${BLUE}Intallation de fail2ban.${NC}"
       apt install fail2ban -y
-      echo -e "${MARRON}Fail2ban est installé.${NC}"
+      echo -e "${BLUE}Fail2ban est installé.${NC}"
       echo "[DEFAULT]
       ignoreip = 127.0.0.1/8
       findtime = 600
