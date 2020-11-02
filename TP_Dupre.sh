@@ -29,6 +29,7 @@ if [ "$HOSTNAME" = web ]; then
     ${IP} -t mangle -F
     ${IP} -t mangle -X
         
+<<<<<<< HEAD
     #les connexions destinées à être routées sont acceptées par défaut
     ${IP} -P INPUT ACCEPT
     ${IP} -P FORWARD ACCEPT
@@ -68,9 +69,23 @@ if [ "$HOSTNAME" = web ]; then
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" > /etc/iptables/iptablesMarion.rules
+=======
+      MARION
+
+      ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
+      ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
+      ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
+      ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
+      ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
+      ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
+      ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
+      ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
+      ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
+>>>>>>> ca63bc978ede0c75ff2e608a550bac7c45742897
     fi
     if [ $choix = 2 ]; then
-      echo -e "Phase 2"
+    #je prends tout les addresses ip au debuts des lignes et je les affiche dans step2.csv
+      grep -E -o "^([0-9]{1,3}[\.]){3}[0-9]{1,3}" /var/log/apache2/adventofcode.log > step2.csv
     fi
     if [ $choix = 3 ]; then
       echo -e "Phase 3"
@@ -231,16 +246,23 @@ if [ "$HOSTNAME" = bdd ]; then
     ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
+<<<<<<< HEAD
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP
     
     ${IP} -P INPUT DROP" >  /etc/iptables/iptablesMarion.rules
+=======
+    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
+>>>>>>> ca63bc978ede0c75ff2e608a550bac7c45742897
     fi
     if [ $choix = 2 ]; then
-      echo -e "Phase 2"
+    #je me connecte en root sur la base adventofcode et je selectionne tout pour le mettre dans un fichier .csv qui seras enregistrer dans la machine de base de donées
+      mysql -u root -p"leo" adventofcode -e"select * from \`2017\`;" > bddstep2.csv
+      scp bddstep2.csv  admin_web@192.168.1.70:/home/admin_web/
     fi
     if [ $choix = 3 ]; then
       echo -e "${RED}Tu nous quittes :c${NC}"
-      reboot
+      #reboot
+      exit 1
     fi
   done
 fi
