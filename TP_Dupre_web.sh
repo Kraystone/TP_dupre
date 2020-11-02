@@ -68,8 +68,9 @@ if [ "$HOSTNAME" = debian ]; then
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" > /etc/iptables/iptables.rules
-    fi
     echo -e "${GREEN}Les regles sont ecrite dans /etc/iptables/iptables.rules.${NC}"
+    fi
+
     if [ $choix = 2 ]; then
     #je prends tout les addresses ip au debuts des lignes et je les affiche dans step2.csv
       grep -E -o "^([0-9]{1,3}[\.]){3}[0-9]{1,3}" /var/log/apache2/adventofcode.log > step2.csv
@@ -170,8 +171,9 @@ if [ "$HOSTNAME" = debian ]; then
       maxretry = 3" > /etc/fail2ban/jail.conf
 
       systemctl restart fail2ban
+      echo -e "${GREEN}Fail2Ban est configuré.${NC}"
     fi
-    echo -e "${GREEN}Fail2Ban est configuré.${NC}"
+    
     if [ $choix = 4 ]; then
       echo -e "${RED}Tu nous quittes :c.${NC}"
       exit 1
