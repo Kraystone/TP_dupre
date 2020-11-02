@@ -104,8 +104,6 @@ if [ "$HOSTNAME" = debian ]; then
       ${IP} -A INPUT -p tcp -m conntrack --ctstate NEW -m limit --limit 20/s --limit-burst 20 -j ACCEPT
       ${IP} -A INPUT -p tcp -m conntrack --ctstate NEW -j DROP
 
-      ${IP} -P INPUT -i ens33 DROP
-
       ## Protection par force brute SSH
       ${IP} -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 

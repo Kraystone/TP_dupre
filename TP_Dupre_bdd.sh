@@ -53,6 +53,7 @@ if [ "$HOSTNAME" = debian ]; then
     ${IP} -A OUTPUT -p tcp -m tcp --dport 3306 -j ACCEPT
     ${IP} -A OUTPUT -p tcp -m tcp --sport 3306 -j ACCEPT
 
+    #on bloque les bloc ip de digital ocean
     ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
     ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
     ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
