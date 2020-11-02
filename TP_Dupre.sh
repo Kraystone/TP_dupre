@@ -68,20 +68,7 @@ if [ "$HOSTNAME" = web ]; then
     ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" > /etc/iptables/iptablesMarion.rules
-=======
-      MARION
-
-      ${IP} -A INPUT -s 104.131.0.0/16 -j DROP
-      ${IP} -A INPUT -s 104.236.0.0/16 -j DROP
-      ${IP} -A INPUT -s 104.248.0.0/16 -j DROP
-      ${IP} -A INPUT -s 107.170.0.0/16 -j DROP
-      ${IP} -A INPUT -s 128.199.0.0/16 -j DROP
-      ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
-      ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
-      ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-      ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
->>>>>>> ca63bc978ede0c75ff2e608a550bac7c45742897
+    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" > /etc/iptables/iptables.rules
     fi
     if [ $choix = 2 ]; then
     #je prends tout les addresses ip au debuts des lignes et je les affiche dans step2.csv
@@ -126,7 +113,7 @@ if [ "$HOSTNAME" = web ]; then
       ${IP} -A port-scanning -p tcp --tcp-flags SYN, ACK, FIN, RST RST -m limit --limit 1 / s --limit-burst 2 -j RETURN
       ${IP} -A port-scan -j DROP
       
-      ${IP} -P INPUT DROP" >> /etc/iptables/iptablesMarion.rules
+      ${IP} -P INPUT DROP" >> /etc/iptables/iptables.rules
       
       #Intallation de fail2ban
       echo -e "[Intallation de fail2ban]"
@@ -246,13 +233,10 @@ if [ "$HOSTNAME" = bdd ]; then
     ${IP} -A INPUT -s 138.68.0.0/16 -j DROP
     ${IP} -A INPUT -s 134.122.0.0/16 -j DROP
     ${IP} -A INPUT -s 138.197.0.0/16 -j DROP
-<<<<<<< HEAD
     ${IP} -A INPUT -s 134.209.0.0/16 -j DROP
     
-    ${IP} -P INPUT DROP" >  /etc/iptables/iptablesMarion.rules
-=======
-    ${IP} -A INPUT -s 134.209.0.0/16 -j DROP" >  /etc/iptables/iptables.rules
->>>>>>> ca63bc978ede0c75ff2e608a550bac7c45742897
+    ${IP} -P INPUT DROP" >  /etc/iptables/iptables.rules
+
     fi
     if [ $choix = 2 ]; then
     #je me connecte en root sur la base adventofcode et je selectionne tout pour le mettre dans un fichier .csv qui seras enregistrer dans la machine de base de donées
