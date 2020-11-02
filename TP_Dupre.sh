@@ -172,7 +172,8 @@ if [ "$HOSTNAME" = web ]; then
     fi
     if [ $choix = 4 ]; then
       echo -e "${RED}Tu nous quittes :c${NC}"
-      reboot
+      #reboot
+      exit 1
     fi
   done
 fi
